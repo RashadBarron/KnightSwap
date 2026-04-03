@@ -7,6 +7,7 @@ Testing Grounds to merge individual code before pushing to main
 ```
 cd Backend
 npm install
+node --env-file=.env server
 ```
 
 

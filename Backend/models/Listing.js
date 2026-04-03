@@ -1,38 +1,40 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const ListingSchema = new mongoose.Schema(
-{
+  {
     title: {
-        type: String,
-        required: true,
-        trim: true
+      type: String,
+      required: true,
+      trim: true,
     },
     description: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     price: {
-        type: Number,
-        required: true,
-        min: 0
+      type: Number,
+      required: true,
+      min: 0,
     },
     condition: {
-        type: String,
-        enum: ["New", "Like New", "Used", "Fair"],
-        default: "Used"
+      type: String,
+      enum: ["New", "Like New", "Used", "Fair"],
+      default: "Used",
     },
     categoryId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Category",
-        required: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: true,
     },
     sellerId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true
-    }
-},
-{ timestamps: true }
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+  },
+  { timestamps: true }
 );
 
-module.exports = mongoose.model("Listing", ListingSchema);
+const Listing = mongoose.model("Listing", ListingSchema);
+
+export default Listing;
