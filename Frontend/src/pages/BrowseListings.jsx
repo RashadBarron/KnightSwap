@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import API from "../../../Backend/services/API";
+import API from "../services/API";
 import ListingCard from "../components/ListingCard";
 
 export default function BrowseListings() {
