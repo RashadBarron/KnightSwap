@@ -15,5 +15,5 @@ npm install
 cd Frontend
 npm install
 npm run dev
-http://localhost:5173
 ```
+Then navigate to: http://localhost:5173
