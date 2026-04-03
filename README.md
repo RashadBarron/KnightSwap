@@ -4,11 +4,16 @@ A student marketplace web app where users can post items for sale, browse listin
 ## Setting up live environment
 
 ### Back end
+```
 cd Backend
 npm install
+```
+
 
 ### Front end
+```
 cd Frontend
 npm install
 npm run dev
 http://localhost:5173
+```
