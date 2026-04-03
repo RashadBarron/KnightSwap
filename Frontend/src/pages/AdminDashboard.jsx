@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import API from "../services/api";
+import API from "../../../Backend/services/API";
 
 export default function AdminDashboard() {
   const [listings, setListings] = useState([]);
