@@ -7,6 +7,7 @@ A student marketplace web app where users can post items for sale, browse listin
 ```
 cd Backend
 npm install
+node --env-file=.env server
 ```
 
 
