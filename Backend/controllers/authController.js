@@ -5,6 +5,12 @@ import { createUserToken, requireToken } from "../config/auth.js";
 // SIGN UP
 export const registerUser = async (req, res) => {
   try {
+    // Check if username already exists
+    const existingUser = await User.findOne({ username: req.body.username });
+    if (existingUser) {
+      return res.status(400).json({ error: "Username already exists" });
+    }
+
     const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(req.body.password, salt);
     const pwStore = req.body.password;
