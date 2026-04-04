@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import API from "../services/API";
+// import API from "../services/API";
 
 export default function AdminDashboard() {
   const [listings, setListings] = useState([]);
 
   useEffect(() => {
-    API.get("/listings").then((res) => setListings(res.data));
+    // API.get("/listings").then((res) => setListings(res.data));
   }, []);
 
   const deleteListing = async (id) => {
-    await API.delete(`/admin/listings/${id}`);
+    // await API.delete(`/admin/listings/${id}`);
     setListings(listings.filter((l) => l._id !== id));
   };
 

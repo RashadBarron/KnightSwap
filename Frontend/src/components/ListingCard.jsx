@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import API from "../services/API";
+// import API from "../services/API";
 
 export default function Favorites() {
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     const fetchFavs = async () => {
-      const res = await API.get("/favorites");
+      // const res = await API.get("/favorites");
       setFavorites(res.data);
     };
     fetchFavs();

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import API from "../services/API";
+// import API from "../services/API";
 import ListingCard from "../components/ListingCard";
 
 export default function BrowseListings() {
@@ -7,7 +7,7 @@ export default function BrowseListings() {
 
   useEffect(() => {
     const fetchListings = async () => {
-      const res = await API.get("/listings");
+      // const res = await API.get("/listings");
       setListings(res.data);
     };
     fetchListings();
