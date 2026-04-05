@@ -1,0 +1,85 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.auth-container {
+  background: #ffffff;
+  padding: 40px;
+  width: 350px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  text-align: center;
+}
+.title {
+  font-size: 32px;
+  margin-bottom: 24px;
+  color: #3b1e54;
+  font-weight: 700;
+}
+
+.toggle-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.toggle-buttons button {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid #3b1e54;
+  background: transparent;
+  color: #3b1e54;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 16px;
+}
+
+.toggle-buttons button.active {
+  background: #3b1e54;
+  color: white;
+}
+
+.toggle-buttons button:first-child {
+  border-radius: 8px 0 0 8px;
+}
+
+.toggle-buttons button:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+.form {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form.active {
+  display: flex;
+}
+
+.form input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+.submit-btn {
+  padding: 12px;
+  background: #f4c542;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s; 
+}
+.submit-btn:hover {
+  background: #e0b238;
+}

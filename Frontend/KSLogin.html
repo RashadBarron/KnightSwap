@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KnightSwap - Login/Register</title>
+  <link rel="stylesheet" href="KSLogin.css" />
+</head>
+<body>
+
+  <div class="auth-container">
+    <h1 class="title">KnightSwap</h1>
+
+    <div class="toggle-buttons">
+      <button id="loginButton" class="active">Login</button>
+      <button id="registerButton">Register</button>
+    </div>
+
+    
+    
+    <form id="loginForm" class="form active">
+      <input type="text" placeholder="Username" required />
+      <input type="password" placeholder="Password" required />
+      <button type="submit" class="submit">Login</button>
+    </form>
+
+    <form id="registerForm" class="form">
+      <input type="text" placeholder="Username" required />
+      <input type="password" placeholder="Password" required />
+      <button type="submit" class="submit">Register</button>
+    </form>
+  </div>
+
+   <script>
+    const loginButton = document.getElementById("loginButton");
+    const registerButton = document.getElementById("registerButton");
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+
+    loginButton.onclick = () => {
+      loginButton.classList.add("active");
+      registerButton.classList.remove("active");
+      loginForm.classList.add("active");
+      registerForm.classList.remove("active");
+    };
+
+    registerButton.onclick = () => {
+      registerButton.classList.add("active");
+      loginButton.classList.remove("active");
+      registerForm.classList.add("active");
+      loginForm.classList.remove("active");
+    };
+     
+  </script>
+
+</body>
+</html>
