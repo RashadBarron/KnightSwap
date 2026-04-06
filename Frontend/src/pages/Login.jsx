@@ -50,7 +50,7 @@ export default function Login({login, user}) {
           </form>
         </div>
         <Link to='/register' className="loginOrRegister">
-          <div>Don't have an account?  <span className='registerTxt'>Sign Up</span></div>
+          <div>Don't have an account?  <span className='registerTxt' >Sign Up</span></div>
         </Link> 
       </div>
     </section>

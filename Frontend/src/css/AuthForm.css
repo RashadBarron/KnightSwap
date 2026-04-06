@@ -99,6 +99,7 @@
 .loginTxt,
 .registerTxt {
   color: var(--accent-variant);
+  text-decoration: underline
 }
 
 .loginTxt:hover,
