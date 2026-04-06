@@ -1,0 +1,142 @@
+/*  ADMIN DASHBOARD  */
+.admin-dashboard {
+  padding: 120px 20px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-dashboard h1 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--text-primary);
+}
+
+/*  TABS  */
+.admin-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.admin-tabs button {
+  padding: 10px 20px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-surface);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease, color 0.2s ease;
+  color: var(--text-secondary);
+}
+
+.admin-tabs button:hover {
+  background: var(--bg-elevated);
+  transform: translateY(-1px);
+}
+
+.admin-tabs button.active {
+  background: var(--accent);
+  color: black;
+}
+
+/*  PANEL  */
+.admin-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.admin-panel h2 {
+  grid-column: 1 / -1;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+/*  CARD  */
+.admin-card {
+  background: var(--bg-surface);
+  border-radius: 12px;
+  padding: 16px;
+
+  border: 1px solid var(--border);
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.4);
+
+  transition: all 0.2s ease;
+}
+
+.admin-card:hover {
+  background: var(--bg-elevated);
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.6);
+  transform: translateY(-2px);
+}
+
+.admin-card p, .admin-card span {
+  margin: 6px 0;
+  color: var(--text-primary);
+}
+
+/*  BUTTONS  */
+.admin-card button {
+  padding: 6px 12px;
+  margin-right: 8px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s ease;
+}
+
+.admin-card .delete-btn {
+  background-color: #e53935;
+  color: #fff;
+}
+
+.admin-card .delete-btn:hover {
+  background-color: #d32f2f;
+}
+
+.admin-card button:not(.delete-btn) {
+  background-color: #ffc107;
+  color: #121212;
+}
+
+.admin-card button:not(.delete-btn):hover {
+  background-color: #ffb300;
+}
+
+/*  CREATE CATEGORY  */
+.create-category {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.create-category input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.create-category input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.create-category button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  background-color: var(--accent);
+  color: black;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.create-category button:hover {
+  background-color: var(--accent-variant);
+}

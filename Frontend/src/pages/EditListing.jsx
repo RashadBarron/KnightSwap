@@ -12,12 +12,10 @@ const EditListing = ({ listingToEdit, setRefreshPageState, closeFloat }) => {
     categoryId: ""
   })
 
-  const categories = [
-    { id: "69cf86051f1ea425922cf874", name: "Textbooks" },
-    { id: "69d1ff1347e34572b94edc80", name: "Electronics" },
-  ]
+  const [categories, setCategories] = useState([]) // dynamic categories
 
   const listingURL = "http://localhost:3000/api/listings"
+  const categoryURL = "http://localhost:3000/api/categories"
 
   // Pre-fill form when editing
   useEffect(() => {
@@ -31,6 +29,21 @@ const EditListing = ({ listingToEdit, setRefreshPageState, closeFloat }) => {
       })
     }
   }, [listingToEdit])
+
+  // Fetch categories dynamically
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await fetch(categoryURL)
+        const data = await res.json()
+        setCategories(data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    fetchCategories()
+  }, [])
 
   // Handle input change
   const handleChange = (e) => {
@@ -135,7 +148,7 @@ const EditListing = ({ listingToEdit, setRefreshPageState, closeFloat }) => {
         >
           <option value="">Select Category</option>
           {categories.map(cat => (
-            <option key={cat.id} value={cat.id}>
+            <option key={cat._id} value={cat._id}>
               {cat.name}
             </option>
           ))}

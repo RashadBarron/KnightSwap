@@ -80,8 +80,11 @@ export const createUserToken = async (req, user) => {
 
 // OPTIONAL: ADMIN-ONLY MIDDLEWARE
 export const requireAdmin = (req, res, next) => {
-  if (!req.user || req.user.role !== "admin") {
-    return res.status(403).json({ error: "Admin access only" });
+  if (!req.user) {
+    return res.status(401).json({ error: "Unauthorized: no user" });
+  }
+  if (req.user.role !== "admin") {
+    return res.status(403).json({ error: "Forbidden: admin only" });
   }
   next();
 };

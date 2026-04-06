@@ -5,7 +5,7 @@ import "../css/Listings.css"
 const List = ({ setRefreshPageState }) => {
 
   const [listing, setListing] = useState([])
-
+  const [categories, setCategories] = useState([]) // dynamically fetched
   const [newForm, setNewForm] = useState({
     title: "",
     description: "",
@@ -14,18 +14,26 @@ const List = ({ setRefreshPageState }) => {
     categoryId: ""
   })
 
-  const categories = [
-    { id: "69cf86051f1ea425922cf874", name: "Textbooks" },
-    { id: "69d1ff1347e34572b94edc80", name: "Electronics" },
-  ]
-
   const listingURL = "http://localhost:3000/api/listings"
+  const categoryURL = "http://localhost:3000/api/categories"
 
+  // Fetch listings
   const fetchListings = async () => {
     try {
       const resListing = await fetch(listingURL)
       const allListing = await resListing.json()
       setListing(allListing)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  // Fetch categories dynamically
+  const fetchCategories = async () => {
+    try {
+      const res = await fetch(categoryURL)
+      const data = await res.json()
+      setCategories(data)
     } catch (err) {
       console.log(err)
     }
@@ -66,7 +74,7 @@ const List = ({ setRefreshPageState }) => {
 
       setListing([...listing, createdListing])
 
-      // reset properly
+      // reset form
       setNewForm({
         title: "",
         description: "",
@@ -82,6 +90,7 @@ const List = ({ setRefreshPageState }) => {
 
   useEffect(() => {
     fetchListings()
+    fetchCategories() // fetch categories on load
   }, [])
 
   return (
@@ -127,7 +136,7 @@ const List = ({ setRefreshPageState }) => {
           <option value="Used">Used</option>
           <option value="Fair">Fair</option>
         </select>
-        {/* CATEGORY ID (REQUIRED) */}
+        {/* CATEGORY ID (DYNAMIC) */}
         <select
           className='listingInput'
           name="categoryId"
@@ -137,11 +146,10 @@ const List = ({ setRefreshPageState }) => {
         >
           <option value="">Select Category</option>
           {categories.map(cat => (
-            <option key={cat.id} value={cat.id}>
+            <option key={cat._id} value={cat._id}>
               {cat.name}
             </option>
           ))}
-
         </select>
         <input
           className="createListingButton"
