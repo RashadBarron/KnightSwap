@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { getUserToken } from '../utils/authToken'
 import "../css/Listings.css"
 
-const List = ({ setRefreshPageState }) => {
+const EditListing = ({ listingToEdit, setRefreshPageState, closeFloat }) => {
 
-  const [listing, setListing] = useState([])
-
-  const [newForm, setNewForm] = useState({
+  const [formData, setFormData] = useState({
     title: "",
     description: "",
     price: "",
@@ -21,105 +19,104 @@ const List = ({ setRefreshPageState }) => {
 
   const listingURL = "http://localhost:3000/api/listings"
 
-  const fetchListings = async () => {
-    try {
-      const resListing = await fetch(listingURL)
-      const allListing = await resListing.json()
-      setListing(allListing)
-    } catch (err) {
-      console.log(err)
+  // Pre-fill form when editing
+  useEffect(() => {
+    if (listingToEdit) {
+      setFormData({
+        title: listingToEdit.title || "",
+        description: listingToEdit.description || "",
+        price: listingToEdit.price || "",
+        condition: listingToEdit.condition || "Used",
+        categoryId: listingToEdit?.categoryId?._id || ""
+      })
     }
-  }
+  }, [listingToEdit])
 
-  const refreshPageFunction = () => {
-    setRefreshPageState(current => !current)
-    setTimeout(() => {
-      setRefreshPageState(current => !current)
-    }, 1000)
-  }
-
+  // Handle input change
   const handleChange = (e) => {
-    setNewForm({
-      ...newForm,
+    setFormData({
+      ...formData,
       [e.target.name]: e.target.value
     })
   }
 
-  const createListing = async (e) => {
+  // Update listing
+  const updateListing = async (e) => {
     e.preventDefault()
-    const currentState = {
-      ...newForm,
-      price: Number(newForm.price) // enforce number
-    }
+
     try {
+      const updatedData = {
+        ...formData,
+        price: Number(formData.price)
+      }
+
       const options = {
-        method: "POST",
+        method: "PUT",
         headers: {
           'Authorization': `Bearer ${getUserToken()}`,
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(currentState)
+        body: JSON.stringify(updatedData)
       }
 
-      const response = await fetch(listingURL, options)
-      const createdListing = await response.json()
+      const res = await fetch(`${listingURL}/${listingToEdit._id}`, options)
 
-      setListing([...listing, createdListing])
+      if (!res.ok) {
+        const errData = await res.json()
+        throw new Error(errData.error || "Update failed")
+      }
 
-      // reset properly
-      setNewForm({
-        title: "",
-        description: "",
-        price: "",
-        condition: "Used",
-        categoryId: ""
-      })
+      // Refresh parent page
+      setRefreshPageState(prev => !prev)
+
+      // Close float
+      closeFloat()
 
     } catch (err) {
       console.log(err)
     }
   }
 
-  useEffect(() => {
-    fetchListings()
-  }, [])
-
   return (
     <div className='createListing'>
-      <h3>Create a new Listing!</h3>
-      <form onSubmit={createListing}>
+      <h3>Edit Listing</h3>
+
+      <form onSubmit={updateListing}>
         <input
           type="text"
           className='listingInput'
-          value={newForm.title}
+          value={formData.title}
           name="title"
           placeholder="Title"
           onChange={handleChange}
           required
         />
+
         <input
           type="text"
           className='listingInput'
-          value={newForm.description}
+          value={formData.description}
           name="description"
           placeholder="Description"
           onChange={handleChange}
           required
         />
+
         <input
           type="number"
           className='listingInput'
-          value={newForm.price}
+          value={formData.price}
           name="price"
           placeholder="Price"
           onChange={handleChange}
           required
         />
-        {/* CONDITION (ENUM) */}
+
+        {/* CONDITION */}
         <select
           className='listingInput'
           name="condition"
-          value={newForm.condition}
+          value={formData.condition}
           onChange={handleChange}
         >
           <option value="New">New</option>
@@ -127,11 +124,12 @@ const List = ({ setRefreshPageState }) => {
           <option value="Used">Used</option>
           <option value="Fair">Fair</option>
         </select>
-        {/* CATEGORY ID (REQUIRED) */}
+
+        {/* CATEGORY */}
         <select
           className='listingInput'
           name="categoryId"
-          value={newForm.categoryId}
+          value={formData.categoryId}
           onChange={handleChange}
           required
         >
@@ -141,17 +139,16 @@ const List = ({ setRefreshPageState }) => {
               {cat.name}
             </option>
           ))}
-
         </select>
+
         <input
           className="createListingButton"
           type="submit"
-          value="List"
-          onClick={refreshPageFunction}
+          value="Update Listing"
         />
       </form>
     </div>
   )
 }
 
-export default List
+export default EditListing

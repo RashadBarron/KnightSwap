@@ -237,8 +237,8 @@ body {
   }
 }
 
-/*  CREATE POST FORM  */
-.createPost {
+/*  CREATE LISTING FORM  */
+.createListing {
   background: var(--bg-surface);
   padding: 16px;
   margin: 20px 0;
@@ -272,7 +272,7 @@ body {
 }
 
 /* FORM BUTTON */
-.createPostButton {
+.createListingButton {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
@@ -288,7 +288,7 @@ body {
   transition: background 0.2s ease;
 }
 
-.createPostButton:hover {
+.createListingButton:hover {
   background: var(--accent-variant);
 }
 
@@ -318,15 +318,13 @@ body {
   color: var(--accent);
 }
 
-.post-actions {
-  margin-top: 10px;
+.listing-actions {
   display: flex;
-  gap: 10px;
 }
 
 .edit-btn, .delete-btn {
-  background-color: #ffc107; /* gold accent */
-  color: #121212; /* dark text for contrast */
+  background-color: #ffc107;
+  color: #121212;
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
@@ -340,7 +338,7 @@ body {
 }
 
 .delete-btn {
-  background-color: #e53935; /* red for delete */
+  background-color: #e53935;
   color: #fff;
 }
 

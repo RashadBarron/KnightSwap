@@ -80,7 +80,6 @@ function App() {
         <Route path='/register' element={<Register register={registerUser}/>}/>
         <Route path="/listings" element={<BrowseListings user={currentUser} loggedIn={isAuthenticated}/>} />
         <Route path="/myListings" element={<MyListings user={currentUser} loggedIn={isAuthenticated}/>} />
-        <Route path="/create" element={<CreateListing />} />
         <Route path="/favorites" element={ <Favorites /> } />
         <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
