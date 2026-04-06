@@ -6,8 +6,7 @@ import Footer from './components/Footer.jsx'
 import Login from "./pages/Login"
 import Register from './pages/Register.jsx'
 import BrowseListings from "./pages/BrowseListings"
-import CreateListing from "./pages/CreateListing"
-import Favorites from "./pages/Favorites"
+import MyFavorites from "./pages/MyFavorites"
 import AdminDashboard from "./pages/AdminDashboard"
 import MyListings from "./pages/MyListings.jsx"
 import "./css/App.css"
@@ -80,7 +79,7 @@ function App() {
         <Route path='/register' element={<Register register={registerUser}/>}/>
         <Route path="/listings" element={<BrowseListings user={currentUser} loggedIn={isAuthenticated}/>} />
         <Route path="/myListings" element={<MyListings user={currentUser} loggedIn={isAuthenticated}/>} />
-        <Route path="/favorites" element={ <Favorites /> } />
+        <Route path="/favorites" element={ <MyFavorites user={currentUser}/> } />
         <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
       <Footer />
