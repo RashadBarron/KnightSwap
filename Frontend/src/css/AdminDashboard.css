@@ -41,12 +41,12 @@
 }
 
 /*  PANEL  */
-.admin-panel {
+/* .admin-panel {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 16px;
   margin-top: 20px;
-}
+} */
 
 .admin-panel h2 {
   grid-column: 1 / -1;
@@ -56,10 +56,11 @@
 
 /*  CARD  */
 .admin-card {
+  display:flex;
   background: var(--bg-surface);
   border-radius: 12px;
   padding: 16px;
-
+  justify-content: space-between;
   border: 1px solid var(--border);
   box-shadow: 0px 1px 3px rgba(0,0,0,0.4);
 
