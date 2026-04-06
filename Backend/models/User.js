@@ -13,13 +13,17 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
+    },
   },
   {
     timestamps: true,
-    id: false, // hides the id of the user
+    id: false,
     toJSON: {
       virtuals: true,
-      // ret is the returned Mongoose document
       transform: (_doc, ret) => {
         delete ret.password;
         return ret;
