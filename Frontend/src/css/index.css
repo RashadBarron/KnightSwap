@@ -1,0 +1,35 @@
+/*  THEME  */
+:root {
+  --bg-primary: #121212;
+  --bg-surface: #1e1e1e;
+  --bg-elevated: #232323;
+
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+
+  --accent: rgb(226, 188, 105);
+  --accent-variant: rgb(207, 163, 67);
+
+  --success: #03da80;
+  --warning: #ffb700;
+  --error: #cf6679;
+
+  --border: #2c2c2c;
+}
+
+body {
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--dark);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+html{
+  height: 100vh;
+}

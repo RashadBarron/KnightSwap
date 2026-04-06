@@ -1,0 +1,123 @@
+/* Center the entire wrapper */
+.gridWrapper {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+/* Login container */
+.welcomeContainer {
+  color: rgb(207, 163, 67);
+  display: grid;
+  justify-self: center;
+  background-color: var(--green);
+  border-radius: 8px;
+  border: 1px rgb(13, 13, 13) solid;
+  padding: 32px;
+  width: 20vw;
+  max-width: 400px;
+  height: auto;
+  box-shadow: 0 8px 20px rgba(182, 148, 77, 0.3);
+}
+
+/* Heading inside the login container */
+.welcomeContainer h2 {
+  text-align: center;
+  margin-bottom: 1.5rem; /* optional spacing */
+}
+
+/* Form wrapper */
+.loginRegister {
+  color: var(--light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Submit button container */
+.welcomeSubmitButtonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* Submit button */
+.welcomeSubmitButton {
+  display: inline-flex;
+  margin: 10px;
+  padding: 6px 50px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.3s ease;
+  color: var(--dark);
+  border-radius: 5px;
+  border: 0px;
+  font-weight: 700;
+  height: 30px;
+  box-shadow: 0px 0px 14px -7px rgba(182, 148, 77, 1);
+  background-color: rgb(207, 163, 67);
+  cursor: pointer;
+}
+
+.welcomeSubmitButton:hover {
+  background-color: rgb(226, 188, 105);
+  transform: scale(1.04);
+  /* Removed color change */
+}
+
+.welcomeSubmitButton:active {
+  transform: scale(0.95);
+}
+
+/* Inputs */
+#username,
+#password {
+  height: 1.4rem;
+  background: rgb(32, 32, 32);
+  border-radius: 1px;
+  border: 1px solid var(--border);
+  padding: 0.5rem;
+  color: var(--text-primary);
+}
+
+/* Center the register link */
+.loginOrRegister {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  background-color: transparent;
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Sign in / Sign up text */
+.loginTxt,
+.registerTxt {
+  color: var(--accent-variant);
+  text-decoration: underline
+}
+
+.loginTxt:hover,
+.registerTxt:hover {
+  color: var(--accent);
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 810px) {
+  .welcomeContainer {
+    width: 80%;
+    height: auto;
+    padding: 24px;
+    border: none;
+    background-color: var(--bg-elevated);
+  }
+
+  .welcomeSubmitButton {
+    padding: 6px 40px;
+  }
+}

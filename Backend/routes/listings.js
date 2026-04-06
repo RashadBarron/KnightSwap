@@ -6,12 +6,16 @@ import {
   getListingById,
   updateListing,
   deleteListing,
+  getListingsByUser 
 } from "../controllers/listingsController.js";
 
 const router = express.Router();
 
 // CREATE
 router.post("/", requireToken, createListing);
+
+// READ listings by user
+router.get("/user/:userId", getListingsByUser);
 
 // READ ALL
 router.get("/", getListings);

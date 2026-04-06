@@ -1,5 +1,4 @@
 import express from "express";
-import "../config/db.connection.js";
 import authRoutes from "./authentication.js";
 import listingsRoutes from "./listings.js";
 import categoriesRoutes from "./categories.js";
