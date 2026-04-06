@@ -64,12 +64,23 @@ function App() {
     }
   }
   
-  const signOutHandler=()=>{
-    if(isAuthenticated){
-      setIsAuthenticated(current => !current);
-      setCurrentUser({});
+  const signOutHandler = () => {
+    clearUserToken();
+    setIsAuthenticated(false);
+    setCurrentUser({});
+  };
+
+  const AdminRoute = ({ children }) => {
+    if (!isAuthenticated) {
+      return <Login user={currentUser} login={loginUser} />;
     }
-  }
+
+    if (currentUser.role !== "admin") {
+      return <p>Access denied</p>;
+    }
+
+    return children;
+  };
 
   return (
     <>
@@ -80,7 +91,7 @@ function App() {
         <Route path="/listings" element={<BrowseListings user={currentUser} loggedIn={isAuthenticated}/>} />
         <Route path="/myListings" element={<MyListings user={currentUser} loggedIn={isAuthenticated}/>} />
         <Route path="/favorites" element={ <MyFavorites user={currentUser}/> } />
-        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin" element={<AdminRoute> <AdminDashboard user={currentUser} token={getUserToken()}/> </AdminRoute>} />
       </Routes>
       <Footer />
     </>
