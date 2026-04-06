@@ -9,6 +9,7 @@ import BrowseListings from "./pages/BrowseListings"
 import CreateListing from "./pages/CreateListing"
 import Favorites from "./pages/Favorites"
 import AdminDashboard from "./pages/AdminDashboard"
+import MyListings from "./pages/MyListings.jsx"
 import "./css/App.css"
 
 function App() {
@@ -78,6 +79,7 @@ function App() {
         <Route path="/" element={<Login user={currentUser} login={loginUser}/>} />
         <Route path='/register' element={<Register register={registerUser}/>}/>
         <Route path="/listings" element={<BrowseListings user={currentUser} loggedIn={isAuthenticated}/>} />
+        <Route path="/myListings" element={<MyListings user={currentUser} loggedIn={isAuthenticated}/>} />
         <Route path="/create" element={<CreateListing />} />
         <Route path="/favorites" element={ <Favorites /> } />
         <Route path="/admin" element={<AdminDashboard />} />

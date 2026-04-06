@@ -34,6 +34,24 @@ export const getListings = async (req, res) => {
   }
 };
 
+// GET listings by user
+export const getListingsByUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ error: "Invalid user ID" });
+    }
+
+    const listings = await Listing.find({ sellerId: userId })
+      .populate("sellerId", "username")
+      .populate("categoryId", "name");
+
+    res.json(listings);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 // GET single listing by ID
 export const getListingById = async (req, res) => {
   try {
