@@ -4,17 +4,19 @@ import Favorite from "../models/Favorite.js";
 export const getFavoritesByUser = async (req, res) => {
   try {
     const favorites = await Favorite.find({ userId: req.params.userId })
-      .populate("listingId")
-      .sort({ createdAt: -1 });
+      .populate({
+        path: "listingId",
+        populate: [
+          { path: "sellerId", select: "username" },
+          { path: "categoryId", select: "name" }
+        ]
+      })
 
-    res.status(200).json(favorites);
-  } catch (error) {
-    res.status(500).json({
-      message: "Could not load favorites",
-      error: error.message,
-    });
+    res.json(favorites)
+  } catch (err) {
+    res.status(500).json({ error: err.message })
   }
-};
+}
 
 // GET FAVORITE COUNT FOR LISTING
 export const getFavoriteCount = async (req, res) => {

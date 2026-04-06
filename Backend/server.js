@@ -18,7 +18,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 // Routes
-app.use("/home", routes);
+app.use("/api", routes);
 
 // Connect to MongoDB, then start server
 async function startServer() {
