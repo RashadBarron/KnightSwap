@@ -17,6 +17,8 @@ const Header=({user, loggedIn, signOut})=>{
         <ul id="menu">
           <Link to="/listings"><li>Home</li></Link>
           <Link to={`/favorites`}><li>Favorites</li></Link>
+          {/* My listings will be where you go and edit/ update or delete your listings */}
+          <Link to={`/myListings`}><li>My Listings</li></Link> 
           <Link onClick={clearLocalStorage} to='/' ><li>Sign Out</li></Link>
         </ul>
       </div>
