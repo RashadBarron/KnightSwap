@@ -1,33 +1,58 @@
-import { useState, useContext } from "react"
-// import API from "../services/API"
-import { AuthContext } from "../context/AuthContext"
-import { useNavigate } from "react-router-dom"
+import React, {useState} from 'react'
+import  {Link, useNavigate} from 'react-router-dom'
+import "../css/AuthForm.css"
 
-export default function Login() {
-  const [form, setForm] = useState({ username: "", password: "" });
-  // const { login } = useContext(AuthContext);
-  const navigate = useNavigate();
+export default function Login({login, user}) {
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // const res = await API.post("/auth/login", form);
-    login(res.data);
-    navigate("/listings");
+  const navigate = useNavigate()
+  // definining the initial state as an object of username and password with empty strings
+  const initialState = { username: "", password: ""}
+  // defining the state of the input and setting it to initial state username/pw
+  const [input, setInput] = useState(initialState)
+
+  // event handler for submitted login
+  const handleLogin=async(e)=>{
+    e.preventDefault()
+    const createdUserToken = await login(input)
+
+    if(createdUserToken){navigate(`/listings`);}
+    else{navigate("/auth/login/")}
+		setInput(initialState);
   };
 
-  return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <input placeholder="Username"
-          onChange={(e) => setForm({ ...form, username: e.target.value })}
-        />
-        <input type="password" placeholder="Password"
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-        />
-        <button>Login</button>
-      </form>
-    </div>
+  // save new state with password and value on event change
+  const handleChange=(e)=>{setInput({ ...input, [e.target.name]: e.target.value });};
 
-  );
+  return (
+    <section className='gridWrapper'>
+      <div className='welcomeContainer'>
+        <h2>Login</h2>
+        <div className="loginRegister">
+          <form onSubmit={handleLogin}>
+            <input id="username"
+                  name="username"
+                  placeholder="Username.."
+                  value={input.username}
+                  onChange={handleChange}/>
+            <br />
+            <br />
+            <input id="password"
+                  name="password"
+                  placeholder="Password.."
+                  type="password"
+                  value={input.password}
+                  onChange={handleChange}/>
+            <br />
+            <br />
+            <div className='welcomeSubmitButtonContainer'>
+              <input className="welcomeSubmitButton" type="submit" value="login" />
+            </div>
+          </form>
+        </div>
+        <Link to='/register' className="loginOrRegister">
+          <div>Don't have an account?  <span className='registerTxt'>Sign Up</span></div>
+        </Link> 
+      </div>
+    </section>
+  )
 }
