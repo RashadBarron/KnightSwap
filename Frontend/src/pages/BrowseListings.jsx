@@ -80,9 +80,9 @@ const BrowseListings = ({ user, loggedIn }) => {
         <div key={item._id} className="listing-card">
           <div className="listing-header">
             <h2 className="listing-title">{item.title}</h2>
-            <Link className="listing-seller" to={`/profile/${item?.sellerId?._id}`}>
+            <div className="listing-seller">
               @{item?.sellerId?.username || "unknown"}
-            </Link>
+            </div>
           </div>
 
           <div className="listing-body">
