@@ -1,64 +1,56 @@
-import React, { useState, useEffect } from 'react'
-import { getUserToken } from '../utils/authToken'
-import "../css/Listings.css"
+import React, { useState, useEffect } from 'react';
+import { getUserToken } from '../utils/authToken';
+import "../css/Listings.css";
 
-const List = ({ setRefreshPageState }) => {
-
-  const [listing, setListing] = useState([])
-  const [categories, setCategories] = useState([]) // dynamically fetched
+const List = ({ setRefreshPageState, closeFloat }) => {
+  const [listing, setListing] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [newForm, setNewForm] = useState({
     title: "",
     description: "",
     price: "",
     condition: "Used",
     categoryId: ""
-  })
+  });
 
-  const listingURL = "http://localhost:3000/api/listings"
-  const categoryURL = "http://localhost:3000/api/categories"
+  const listingURL = "http://localhost:3000/api/listings";
+  const categoryURL = "http://localhost:3000/api/categories";
 
   // Fetch listings
   const fetchListings = async () => {
     try {
-      const resListing = await fetch(listingURL)
-      const allListing = await resListing.json()
-      setListing(allListing)
+      const resListing = await fetch(listingURL);
+      const allListing = await resListing.json();
+      setListing(allListing);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   // Fetch categories dynamically
   const fetchCategories = async () => {
     try {
-      const res = await fetch(categoryURL)
-      const data = await res.json()
-      setCategories(data)
+      const res = await fetch(categoryURL);
+      const data = await res.json();
+      setCategories(data);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   const refreshPageFunction = () => {
-    setRefreshPageState(current => !current)
-    setTimeout(() => {
-      setRefreshPageState(current => !current)
-    }, 1000)
-  }
+    setRefreshPageState(current => !current);
+    setTimeout(() => setRefreshPageState(current => !current), 1000);
+  };
 
   const handleChange = (e) => {
-    setNewForm({
-      ...newForm,
-      [e.target.name]: e.target.value
-    })
-  }
+    setNewForm({ ...newForm, [e.target.name]: e.target.value });
+  };
 
   const createListing = async (e) => {
-    e.preventDefault()
-    const currentState = {
-      ...newForm,
-      price: Number(newForm.price) // enforce number
-    }
+    e.preventDefault();
+    const currentState = { ...newForm, price: Number(newForm.price) };
+
     try {
       const options = {
         method: "POST",
@@ -67,12 +59,12 @@ const List = ({ setRefreshPageState }) => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(currentState)
-      }
+      };
 
-      const response = await fetch(listingURL, options)
-      const createdListing = await response.json()
+      const response = await fetch(listingURL, options);
+      const createdListing = await response.json();
 
-      setListing([...listing, createdListing])
+      setListing([...listing, createdListing]);
 
       // reset form
       setNewForm({
@@ -81,17 +73,23 @@ const List = ({ setRefreshPageState }) => {
         price: "",
         condition: "Used",
         categoryId: ""
-      })
+      });
+
+      // **Close modal after creation**
+      if (closeFloat) closeFloat();
+
+      // refresh listings page
+      refreshPageFunction();
 
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchListings()
-    fetchCategories() // fetch categories on load
-  }, [])
+    fetchListings();
+    fetchCategories();
+  }, []);
 
   return (
     <div className='createListing'>
@@ -124,7 +122,6 @@ const List = ({ setRefreshPageState }) => {
           onChange={handleChange}
           required
         />
-        {/* CONDITION (ENUM) */}
         <select
           className='listingInput'
           name="condition"
@@ -136,7 +133,6 @@ const List = ({ setRefreshPageState }) => {
           <option value="Used">Used</option>
           <option value="Fair">Fair</option>
         </select>
-        {/* CATEGORY ID (DYNAMIC) */}
         <select
           className='listingInput'
           name="categoryId"
@@ -155,11 +151,10 @@ const List = ({ setRefreshPageState }) => {
           className="createListingButton"
           type="submit"
           value="List"
-          onClick={refreshPageFunction}
         />
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default List
+export default List;

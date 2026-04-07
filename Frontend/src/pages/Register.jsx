@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import  {useNavigate, Link} from 'react-router-dom'
 
 const Register=({register}) =>{
@@ -8,20 +8,25 @@ const Register=({register}) =>{
   // defining the state of the input and setting it to initial state username/pw
   const [input, setInput]= useState(initialState)
 
+
   // event handler for submitted Register info
-  const handleRegister=async(e)=>{
+  const handleRegister = async (e) => {
     e.preventDefault()
-
-    const createdUserToken = await register(input)
-
-    if(createdUserToken){navigate(`/listings`)}
-    else{navigate("/register/")}
-    
-		setInput(initialState);
-  };
+    const token = await register(input)
+    if (token) {
+      // small delay to make sure state is updated
+      setTimeout(() => {
+        navigate("/listings")
+      }, 100)
+    } else {
+      navigate("/register")
+    }
+    setInput(initialState)
+  }
 
   // save new state with password and value on event change
   const handleChange=(e)=>{setInput({ ...input, [e.target.name]: e.target.value });};
+
 
   // Register Form JSX and export
   return (
